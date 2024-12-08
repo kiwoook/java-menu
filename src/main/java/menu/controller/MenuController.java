@@ -4,6 +4,7 @@ import java.util.List;
 import menu.model.Category;
 import menu.model.Crew;
 import menu.model.Crews;
+import menu.model.DayOfTheWeek;
 import menu.utils.RecoveryUtils;
 import menu.view.InputViewer;
 import menu.view.OutputViewer;
@@ -25,6 +26,7 @@ public class MenuController {
         getCrew();
         getPickyFoodsByCrews();
         createWeeklyFood();
+        result();
     }
 
     public void getCrew() {
@@ -38,11 +40,22 @@ public class MenuController {
     }
 
     public void createWeeklyFood() {
-        for (int i = 0; i < 5; i++) {
-            for (Crew crew : crews.getCrews()) {
-                crew.recommendFoodByDay(i, categories.get(i));
-            }
+        for (DayOfTheWeek dayOfTheWeek : DayOfTheWeek.values()) {
+            createFoodByDayOfTheWeek(dayOfTheWeek);
         }
+    }
+
+    private void createFoodByDayOfTheWeek(DayOfTheWeek dayOfTheWeek) {
+        for (Crew crew : crews.getCrews()) {
+            crew.recommendFoodByDay(dayOfTheWeek, categories.get(dayOfTheWeek.index));
+        }
+    }
+
+    public void result() {
+        String categoryDivision = Category.toDivision(categories);
+        String crewsResult = crews.toResult();
+
+        outputViewer.printResult(categoryDivision, crewsResult);
     }
 
 

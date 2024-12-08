@@ -3,6 +3,7 @@ package menu.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import menu.exception.CustomIllegalArgumentException;
 import menu.exception.ErrorMessage;
@@ -21,15 +22,15 @@ public class Crew {
         this.menu = new ArrayList<>(List.of("", "", "", "", ""));
     }
 
-    public void recommendFoodByDay(int i, Category category) {
+    public void recommendFoodByDay(DayOfTheWeek day, Category category) {
 
         String food = category.recommendFoodByRecommend();
 
         if (isContainPickyFoods(food) || isContainFood(food)) {
-            recommendFoodByDay(i, category);
+            recommendFoodByDay(day, category);
         }
 
-        menu.set(i, food);
+        menu.set(day.getIndex(), food);
     }
 
     private boolean isContainPickyFoods(String food) {
@@ -70,6 +71,17 @@ public class Crew {
 
     public String getName() {
         return name;
+    }
+
+    public String toResult() {
+        StringJoiner joiner = new StringJoiner("|", "[", "]");
+        joiner.add(" " + name + " ");
+
+        for (String food : menu) {
+            joiner.add(" " + food + " ");
+        }
+
+        return joiner.toString();
     }
 
     @Override

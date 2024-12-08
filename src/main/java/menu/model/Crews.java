@@ -1,7 +1,10 @@
 package menu.model;
 
+import static menu.utils.Constants.ENTER;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import menu.utils.StringUtils;
 
 public class Crews {
@@ -20,7 +23,6 @@ public class Crews {
         String[] split = StringUtils.split(",", input, null);
 
         for (String name : split) {
-            // 이름 중복에 대한 검증이 필요할까?
             items.add(new Crew(name));
         }
 
@@ -28,6 +30,16 @@ public class Crews {
 
     public List<Crew> getCrews() {
         return items;
+    }
+
+    public String toResult() {
+        StringJoiner joiner = new StringJoiner(ENTER);
+
+        for (Crew crew : items) {
+            joiner.add(crew.toResult());
+        }
+
+        return joiner.toString();
     }
 
     @Override
