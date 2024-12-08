@@ -50,13 +50,21 @@ public class Crew {
 
         List<String> split = Arrays.stream(StringUtils.split(SEPARATOR, input, null))
                 .collect(Collectors.toList());
+
+        split.forEach(this::validMenu);
         validPickyFoods(split);
 
         pickyFoods.addAll(split);
     }
 
-    public void validPickyFoods(List<String> split) {
-        if (split.size() > 2) {
+    public void validMenu(String menu) {
+        if (!Category.getAllMenu().contains(menu)) {
+            throw new CustomIllegalArgumentException(ErrorMessage.NOT_FOUND_MENU);
+        }
+    }
+
+    public void validPickyFoods(List<String> menus) {
+        if (menus.size() > 2) {
             throw new CustomIllegalArgumentException(ErrorMessage.EXCEED_PICKY_FOOD_SIZE);
         }
     }

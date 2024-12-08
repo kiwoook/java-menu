@@ -22,7 +22,7 @@ public class Crews {
         return new Crews();
     }
 
-    public void addCrews(String input) {
+    public void addAll(String input) {
         validInput(input);
         String[] split = StringUtils.split(SEPARATOR, input, null);
 
@@ -30,6 +30,14 @@ public class Crews {
             items.add(new Crew(name));
         }
 
+        validSize();
+    }
+
+    public void validSize() {
+        int size = items.size();
+        if (size < 2 || size > 5) {
+            throw new CustomIllegalArgumentException(ErrorMessage.EXCEED_CREW_SIZE);
+        }
     }
 
     public void validInput(String input) {

@@ -30,7 +30,7 @@ public class MenuController {
     }
 
     public void getCrew() {
-        RecoveryUtils.executeWithRetry(inputViewer::promptCrewNames, crews::addCrews);
+        RecoveryUtils.executeWithRetry(inputViewer::promptCrewNames, crews::addAll);
     }
 
     public void getPickyFoodsByCrews() {

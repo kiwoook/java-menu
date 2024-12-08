@@ -25,6 +25,16 @@ public enum Category {
         this.menus = menus;
     }
 
+    public static List<String> getAllMenu() {
+        List<String> allMenu = new ArrayList<>();
+
+        for (Category category : values()) {
+            allMenu.addAll(category.getMenus());
+        }
+
+        return allMenu;
+    }
+
     public static List<Category> getWeeklyCategory() {
         List<Category> weeklyCategory = new ArrayList<>();
 
@@ -75,6 +85,7 @@ public enum Category {
 
         return joiner.toString();
     }
+
 
     public String recommendFoodByRecommend() {
         List<String> menus = this.getMenus();
