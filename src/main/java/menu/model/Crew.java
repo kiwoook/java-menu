@@ -1,5 +1,7 @@
 package menu.model;
 
+import static menu.utils.Constants.SEPARATOR;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +48,7 @@ public class Crew {
             return;
         }
 
-        List<String> split = Arrays.stream(StringUtils.split(",", input, null))
+        List<String> split = Arrays.stream(StringUtils.split(SEPARATOR, input, null))
                 .collect(Collectors.toList());
         validPickyFoods(split);
 
@@ -75,10 +77,10 @@ public class Crew {
 
     public String toResult() {
         StringJoiner joiner = new StringJoiner("|", "[", "]");
-        joiner.add(" " + name + " ");
+        joiner.add(StringUtils.formatString(name));
 
         for (String food : menu) {
-            joiner.add(" " + food + " ");
+            joiner.add(StringUtils.formatString(food));
         }
 
         return joiner.toString();

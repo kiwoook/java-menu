@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+import menu.utils.StringUtils;
 
 public enum Category {
     JPN(1, "일식", List.of("규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼")),
@@ -29,13 +30,17 @@ public enum Category {
 
         do {
             weeklyCategory.clear();
-            for (int i = 0; i < 5; i++) {
-                int number = Randoms.pickNumberInRange(1, 5);
-                weeklyCategory.add(getCategoryByNumber(number));
-            }
+            createWeeklyCategory(weeklyCategory);
         } while (isNotValidWeeklyCategory(weeklyCategory));
 
         return weeklyCategory;
+    }
+
+    private static void createWeeklyCategory(List<Category> weeklyCategory) {
+        for (int i = 0; i < 5; i++) {
+            int number = Randoms.pickNumberInRange(1, 5);
+            weeklyCategory.add(getCategoryByNumber(number));
+        }
     }
 
     private static Category getCategoryByNumber(int number) {
@@ -61,11 +66,11 @@ public enum Category {
 
     public static String toDivision(List<Category> categories) {
         StringJoiner joiner = new StringJoiner("|", "[", "]");
-        joiner.add(" 카테고리 ");
+        joiner.add(StringUtils.formatString("카테고리"));
 
         for (Category category : categories) {
             String korean = category.getKorean();
-            joiner.add(" " + korean + " ");
+            joiner.add(StringUtils.formatString(korean));
         }
 
         return joiner.toString();
@@ -77,8 +82,8 @@ public enum Category {
         return Randoms.shuffle(menus).get(0);
     }
 
-    public List<String> getMenus() {
-        return menus;
+    private List<String> getMenus() {
+        return new ArrayList<>(menus);
     }
 
     public String getKorean() {

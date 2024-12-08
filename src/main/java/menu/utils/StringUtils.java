@@ -1,15 +1,10 @@
 package menu.utils;
 
-import java.text.DecimalFormat;
-import java.util.List;
-import java.util.StringJoiner;
-import java.util.regex.Pattern;
 import menu.exception.CustomIllegalArgumentException;
 import menu.exception.ErrorMessage;
 
 public class StringUtils {
 
-    private static final String OR = "|";
 
     private StringUtils() {
     }
@@ -26,31 +21,8 @@ public class StringUtils {
         return split;
     }
 
-    public static String regexSeparators(List<String> separators) {
-        StringJoiner regex = new StringJoiner(OR);
-
-        for (String separator : separators) {
-            regex.add(Pattern.quote(separator));
-        }
-
-        return regex.toString();
-    }
-
-    public static String regexSeparators(String separator, String... separators) {
-        StringJoiner regex = new StringJoiner(OR);
-        regex.add(separator);
-
-        for (String sep : separators) {
-            regex.add(Pattern.quote(sep));
-        }
-
-        return regex.toString();
-    }
-
-    public static String numberFormat(long number) {
-        DecimalFormat format = new DecimalFormat("#,###");
-
-        return format.format(number);
+    public static String formatString(String value) {
+        return " " + value + " ";
     }
 
 }

@@ -1,10 +1,13 @@
 package menu.model;
 
 import static menu.utils.Constants.ENTER;
+import static menu.utils.Constants.SEPARATOR;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import menu.exception.CustomIllegalArgumentException;
+import menu.exception.ErrorMessage;
 import menu.utils.StringUtils;
 
 public class Crews {
@@ -20,10 +23,18 @@ public class Crews {
     }
 
     public void addCrews(String input) {
-        String[] split = StringUtils.split(",", input, null);
+        validInput(input);
+        String[] split = StringUtils.split(SEPARATOR, input, null);
 
         for (String name : split) {
             items.add(new Crew(name));
+        }
+
+    }
+
+    public void validInput(String input) {
+        if (input == null || input.isBlank()) {
+            throw new CustomIllegalArgumentException(ErrorMessage.INVALID_INPUT);
         }
 
     }
