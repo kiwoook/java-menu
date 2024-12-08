@@ -41,15 +41,15 @@ public class MenuController {
 
     public void createWeeklyFood() {
         for (DayOfTheWeek dayOfTheWeek : DayOfTheWeek.values()) {
-            createFoodByDayOfTheWeek(dayOfTheWeek);
+            recommendFoodByDayOfTheWeek(dayOfTheWeek);
         }
     }
 
-    private void createFoodByDayOfTheWeek(DayOfTheWeek dayOfTheWeek) {
+    private void recommendFoodByDayOfTheWeek(DayOfTheWeek dayOfTheWeek) {
         Category category = Category.getCategory();
 
         if (!categoryHistory.canUseCategory(category)) {
-            createFoodByDayOfTheWeek(dayOfTheWeek);
+            recommendFoodByDayOfTheWeek(dayOfTheWeek);
             return;
         }
 

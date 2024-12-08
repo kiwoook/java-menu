@@ -18,6 +18,5 @@ class CrewsTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> crews.addAll(input));
 
         assertThat(exception.getMessage()).isEqualTo(ErrorMessage.EXCEED_CREW_SIZE.getMessage());
-
     }
 }
