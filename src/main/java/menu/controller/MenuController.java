@@ -1,7 +1,7 @@
 package menu.controller;
 
-import java.util.List;
 import menu.model.Category;
+import menu.model.CategoryHistory;
 import menu.model.Crew;
 import menu.model.Crews;
 import menu.model.DayOfTheWeek;
@@ -15,7 +15,7 @@ public class MenuController {
     private final OutputViewer outputViewer;
 
     private final Crews crews = Crews.create();
-    private final List<Category> categories = Category.getWeeklyCategory();
+    private final CategoryHistory categoryHistory = CategoryHistory.create();
 
     public MenuController(InputViewer inputViewer, OutputViewer outputViewer) {
         this.inputViewer = inputViewer;
@@ -46,13 +46,20 @@ public class MenuController {
     }
 
     private void createFoodByDayOfTheWeek(DayOfTheWeek dayOfTheWeek) {
+        Category category = Category.getCategory();
+
+        if (!categoryHistory.canUseCategory(category)) {
+            createFoodByDayOfTheWeek(dayOfTheWeek);
+        }
+        categoryHistory.add(category);
+
         for (Crew crew : crews.getCrews()) {
-            crew.recommendFoodByDay(dayOfTheWeek, categories.get(dayOfTheWeek.index));
+            crew.recommendFoodByDay(dayOfTheWeek, category);
         }
     }
 
     public void result() {
-        String categoryDivision = Category.toDivision(categories);
+        String categoryDivision = categoryHistory.toDivision();
         String crewsResult = crews.toResult();
 
         outputViewer.printResult(categoryDivision, crewsResult);
