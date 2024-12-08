@@ -50,7 +50,9 @@ public class MenuController {
 
         if (!categoryHistory.canUseCategory(category)) {
             createFoodByDayOfTheWeek(dayOfTheWeek);
+            return;
         }
+
         categoryHistory.add(category);
 
         for (Crew crew : crews.getCrews()) {

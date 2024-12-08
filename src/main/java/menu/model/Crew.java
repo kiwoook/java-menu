@@ -30,6 +30,7 @@ public class Crew {
 
         if (isContainPickyFoods(food) || isContainFood(food)) {
             recommendFoodByDay(day, category);
+            return;
         }
 
         menu.set(day.getIndex(), food);
