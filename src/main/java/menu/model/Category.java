@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Category {
     JPN(1, "일식", List.of("규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼")),
@@ -24,13 +25,10 @@ public enum Category {
     }
 
     public static List<String> getAllMenu() {
-        List<String> allMenu = new ArrayList<>();
-
-        for (Category category : values()) {
-            allMenu.addAll(category.getMenus());
-        }
-
-        return allMenu;
+        return Arrays.stream(values())
+                .map(Category::getMenus)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     public static Category getCategory() {
@@ -43,22 +41,6 @@ public enum Category {
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
-
-    public static boolean isNotValidWeeklyCategory(List<Category> weeklyCategory) {
-        for (Category category : values()) {
-            if (countCategory(weeklyCategory, category) >= 3) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static long countCategory(List<Category> weeklyCategory, Category sameCategory) {
-        return weeklyCategory.stream()
-                .filter(category -> category.equals(sameCategory))
-                .count();
-    }
-
 
     public String recommendFoodByRecommend() {
         List<String> menus = this.getMenus();

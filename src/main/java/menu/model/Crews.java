@@ -44,7 +44,6 @@ public class Crews {
         if (input == null || input.isBlank()) {
             throw new CustomIllegalArgumentException(ErrorMessage.INVALID_INPUT);
         }
-
     }
 
     public List<Crew> getCrews() {
