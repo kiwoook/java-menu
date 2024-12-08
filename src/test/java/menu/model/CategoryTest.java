@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class CategoryTest {
@@ -16,6 +17,14 @@ class CategoryTest {
         for (int number = 1; number <= 5; number++) {
             assertThat(Category.getCategoryByNumber(number)).isEqualTo(expect.get(number - 1));
         }
+    }
+
+    @RepeatedTest(1000)
+    @DisplayName("정해진 카테고리 내에 음식을 반환해야 한다.")
+    void test1() {
+        List<String> menus = Category.JPN.getMenus();
+
+        assertThat(menus).contains(Category.JPN.recommendFoodByRecommend());
     }
 
 

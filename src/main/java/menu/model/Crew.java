@@ -25,7 +25,6 @@ public class Crew {
     }
 
     public void recommendFoodByDay(DayOfTheWeek day, Category category) {
-
         String food = category.recommendFoodByRecommend();
 
         if (isContainPickyFoods(food) || isContainFood(food)) {

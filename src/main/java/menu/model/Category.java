@@ -48,7 +48,7 @@ public enum Category {
         return Randoms.shuffle(menus).get(0);
     }
 
-    private List<String> getMenus() {
+    public List<String> getMenus() {
         return new ArrayList<>(menus);
     }
 
