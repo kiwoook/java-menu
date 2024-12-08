@@ -94,12 +94,4 @@ public class Crew {
         return joiner.toString();
     }
 
-    @Override
-    public String toString() {
-        return "Crew{" +
-                "name='" + name + '\'' +
-                ", pickyFoods=" + pickyFoods +
-                ", menu=" + menu +
-                '}';
-    }
 }

@@ -53,13 +53,13 @@ public enum Category {
         }
     }
 
-    private static Category getCategoryByNumber(int number) {
+    public static Category getCategoryByNumber(int number) {
         return Arrays.stream(values()).filter(category -> category.number == number)
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private static boolean isNotValidWeeklyCategory(List<Category> weeklyCategory) {
+    public static boolean isNotValidWeeklyCategory(List<Category> weeklyCategory) {
         for (Category category : values()) {
             if (countCategory(weeklyCategory, category) >= 3) {
                 return true;

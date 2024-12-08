@@ -61,10 +61,4 @@ public class Crews {
         return joiner.toString();
     }
 
-    @Override
-    public String toString() {
-        return "Crews{" +
-                "items=" + items +
-                '}';
-    }
 }
