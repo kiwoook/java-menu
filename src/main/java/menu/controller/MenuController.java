@@ -1,5 +1,6 @@
 package menu.controller;
 
+import menu.model.Crew;
 import menu.model.Crews;
 import menu.utils.RecoveryUtils;
 import menu.view.InputViewer;
@@ -19,13 +20,19 @@ public class MenuController {
 
     public void execute() {
         getCrew();
+        getPickyFoodsByCrews();
+        System.out.println(crews);
     }
 
     public void getCrew() {
         RecoveryUtils.executeWithRetry(inputViewer::promptCrewNames, crews::addCrews);
     }
 
-    
+    public void getPickyFoodsByCrews() {
+        for (Crew crew : crews.getCrews()) {
+            RecoveryUtils.executeWithRetry(() -> inputViewer.promptPickyFoods(crew.getName()), crew::addPickyFoods);
+        }
+    }
 
 
 }

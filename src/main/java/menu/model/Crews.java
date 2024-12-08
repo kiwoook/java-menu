@@ -26,6 +26,9 @@ public class Crews {
 
     }
 
+    public List<Crew> getCrews() {
+        return items;
+    }
 
     @Override
     public String toString() {

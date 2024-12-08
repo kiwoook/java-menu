@@ -12,4 +12,10 @@ public class InputViewer {
 
         return Console.readLine();
     }
+
+    public String promptPickyFoods(String name) {
+        System.out.println(ENTER + name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
+
+        return Console.readLine();
+    }
 }
