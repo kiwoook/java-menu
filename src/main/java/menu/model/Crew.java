@@ -11,14 +11,33 @@ import menu.utils.StringUtils;
 public class Crew {
 
     private final String name;
-    private List<String> pickyFoods;
-    private List<String> menu;
+    private final List<String> pickyFoods;
+    private final List<String> menu;
 
     public Crew(String name) {
         validName(name);
         this.name = name;
         this.pickyFoods = new ArrayList<>();
-        this.menu = new ArrayList<>();
+        this.menu = new ArrayList<>(List.of("", "", "", "", ""));
+    }
+
+    public void recommendFoodByDay(int i, Category category) {
+
+        String food = category.recommendFoodByRecommend();
+
+        if (isContainPickyFoods(food) || isContainFood(food)) {
+            recommendFoodByDay(i, category);
+        }
+
+        menu.set(i, food);
+    }
+
+    private boolean isContainPickyFoods(String food) {
+        return pickyFoods.contains(food);
+    }
+
+    private boolean isContainFood(String food) {
+        return menu.contains(food);
     }
 
     public void addPickyFoods(String input) {

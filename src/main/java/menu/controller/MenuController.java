@@ -1,5 +1,7 @@
 package menu.controller;
 
+import java.util.List;
+import menu.model.Category;
 import menu.model.Crew;
 import menu.model.Crews;
 import menu.utils.RecoveryUtils;
@@ -12,6 +14,7 @@ public class MenuController {
     private final OutputViewer outputViewer;
 
     private final Crews crews = Crews.create();
+    private final List<Category> categories = Category.getWeeklyCategory();
 
     public MenuController(InputViewer inputViewer, OutputViewer outputViewer) {
         this.inputViewer = inputViewer;
@@ -21,7 +24,7 @@ public class MenuController {
     public void execute() {
         getCrew();
         getPickyFoodsByCrews();
-        System.out.println(crews);
+        createWeeklyFood();
     }
 
     public void getCrew() {
@@ -31,6 +34,14 @@ public class MenuController {
     public void getPickyFoodsByCrews() {
         for (Crew crew : crews.getCrews()) {
             RecoveryUtils.executeWithRetry(() -> inputViewer.promptPickyFoods(crew.getName()), crew::addPickyFoods);
+        }
+    }
+
+    public void createWeeklyFood() {
+        for (int i = 0; i < 5; i++) {
+            for (Crew crew : crews.getCrews()) {
+                crew.recommendFoodByDay(i, categories.get(i));
+            }
         }
     }
 
